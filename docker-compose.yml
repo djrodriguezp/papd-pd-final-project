@@ -6,12 +6,13 @@ services:
             - POSTGRES_USER=airflow
             - POSTGRES_PASSWORD=airflow
             - POSTGRES_DB=airflow
+            - PGDATA=/var/lib/postgresql/data/pgdata
         logging:
             options:
                 max-size: 10m
                 max-file: "3"
         volumes:
-          - ./postgres:/var/lib/postgresql
+          - ./postgres/pgdata:/var/lib/postgresql/data/pgdata
 
     airflow:
         build:  ./Dockerfiles/airflow
@@ -28,7 +29,7 @@ services:
                 max-file: "3"
         volumes:
             - ./airflow/dags:/usr/local/airflow/dags
-            #- ./monitor:/home/airflow/monitor
+            - ./airflow/monitor:/home/airflow/monitor
             # - ./plugins:/usr/local/airflow/plugins
         ports:
             - "8080:8080"
@@ -39,16 +40,16 @@ services:
             timeout: 30s
             retries: 3
 
-    # db:
-    #     image: mysql:5.7
-    #     volumes:
-    #         #- ./db_data:/var/lib/mysql
-    #         - ./script/schema.sql:/docker-entrypoint-initdb.d/1.sql
-    #     restart: always
-    #     ports:
-    #         - 3306:3306
-    #     environment:
-    #         MYSQL_ROOT_PASSWORD: test123
-    #         MYSQL_DATABASE: test
-    #         MYSQL_USER: test
-    #         MYSQL_PASSWORD: test123
+    mysql_db:
+         image: mysql:5.7
+         volumes:
+             - ./mysql/db_data:/var/lib/mysql
+             - ./mysql/scripts/schema.sql:/docker-entrypoint-initdb.d/1.sql
+         restart: always
+         ports:
+             - 3306:3306
+         environment:
+             MYSQL_ROOT_PASSWORD: supersecretpass
+             MYSQL_DATABASE: covid19
+             MYSQL_USER: covid19
+             MYSQL_PASSWORD: secretpass
