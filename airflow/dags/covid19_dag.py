@@ -27,7 +27,7 @@ def etl_process(**kwargs):
     mysql_connection = MySqlHook(mysql_conn_id=CONNECTION_DB_NAME).get_sqlalchemy_engine()
     logger.info(kwargs["execution_date"])
     file_path = FSHook(FILE_CONNECTION_NAME).get_path()
-    logger.info(str(file_path))
+
     for covid_file in glob(file_path+"covid19/time_series_covid19_*_global.csv"):
 
         match = re.search('time_series_covid19_(confirmed|deaths|recovered)_global.csv', os.path.basename(covid_file))
@@ -58,31 +58,13 @@ def etl_process(**kwargs):
 
             logger.info(f"Rows inserted {len(df.index)}")
         else:
-            logger.warning("Deleting unexpected filename: " + covid_file)
+            logger.warning("Not valid covid filename status: " + covid_file)
 
-        # Removed processed file
-        os.remove(covid_file)
-
-    for wrong_file_name in  glob(file_path + "covid19/*"):
-        logger.warning("Deleting unexpected filename: "+wrong_file_name)
-        os.remove(wrong_file_name)
-
-    #mysql_connection = MySqlHook(mysql_conn_id=CONNECTION_DB_NAME).get_sqlalchemy_engine()
-    #full_path = f'{file_path}/{filename}'
-    #df = (pd.read_csv(full_path, encoding = "ISO-8859-1", usecols=COLUMNS.keys(), parse_dates=DATE_COLUMNS)
-    #      .rename(columns=COLUMNS)
-    #      )
-
-    #with mysql_connection.begin() as connection:
-    #    connection.execute("DELETE FROM test.sales WHERE 1=1")
-    #    df.to_sql('sales', con=connection, schema='test', if_exists='append', index=False)
-
-    #os.remove(full_path)
-
-    #logger.info(f"Rows inserted {len(df.index)}")
-
-
-
+    #Clean all files
+    logger.info("Cleaning files...")
+    for file_name in  glob(file_path + "covid19/*"):
+        logger.info("Deleting filename: "+file_name)
+        os.remove(file_name)
 
 
 dag = DAG('covid19_ingestion_dag', description='Dag to Ingest Covid19 Files',
