@@ -1,0 +1,13 @@
+dataset = pd.read_csv("covid19_test.csv")
+df_column_names = dataset.columns.values.tolist()
+transformed_df = dataset.melt(id_vars=df_column_names[0:4],
+                              value_vars=df_column_names[4:],
+                               var_name='date', value_name='count')
+
+transformed_df['status'] = 'confirmed'
+transformed_df
+
+test = df[mask].groupby(['lat','lon'])['count'].agg(['first', 'last']).reset_index()
+#diff = test['count']['last']-test['count']['first']
+#diff
+test['delta'] = test['last'] - test['first']
