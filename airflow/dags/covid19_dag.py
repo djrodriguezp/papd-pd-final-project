@@ -38,15 +38,24 @@ def etl_process(**kwargs):
             #Read csv file as pandas DataFrame
             df = (pd.read_csv(covid_file)
                   .rename(columns=DF_COLUMNS))
+            df.state = df.state.fillna('n/a')
+            column_names = df.columns.values.tolist()
 
-            df_column_names = df.columns.values.tolist()
+            #Get deltas of date columns
+            diff_df = df[column_names[4:]].diff(axis=1)
+            diff_df[column_names[4]] = df[column_names[4]]
+            df_data = [df[column_names[0:4]], diff_df[column_names[4:]].astype(int)]
+            transformed_df = pd.concat(df_data, axis=1)
+
 
             #Use pandas melt function to transform dates columns to rows
-            transformed_df = df.melt(id_vars=df_column_names[0:4],
-                                     value_vars=df_column_names[4:],
-                                     var_name='date', value_name='count')
+            transformed_df = transformed_df.melt(id_vars=column_names[0:4],
+                                     value_vars=column_names[4:],
+                                     var_name='date', value_name='cases')
+
             transformed_df['date'] = pd.to_datetime(transformed_df['date'], format='%m/%d/%y')
             transformed_df['status'] = covid_status
+            transformed_df = transformed_df.sort_values(['date'])
 
             #Insert transformed DataFrame into
 

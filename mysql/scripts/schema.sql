@@ -5,6 +5,6 @@ CREATE TABLE covid19.global_data(
     lat float,
     lon float,
     date date,
-    count int,
+    cases int,
     status varchar(20)
 );
