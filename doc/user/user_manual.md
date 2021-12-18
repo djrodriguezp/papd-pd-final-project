@@ -31,13 +31,15 @@ Los filtros que se pueden realizar son:
 
 Se muestra en un mapa mundial los tipos de casos dentro de las fechas para el País y Estado seleccionados en los filtros, se muestra un punto de diferente color dependiendo del tipo de casos que se seleccionó y el tamaño del punto dependerá de la cantidad de casos que existan, mientras más casos sean mayor será el tamaño del punto. De forma interactiva al colocar el cursor sobre cada uno de los puntos en el mapa, se despliega la información.
 
-Se muestra a la derecha del mapa, los totales para cada tipo de caso y el cambio que ha existido respecto al día anterior ya sea incremento o decremento.
-
 ![](images/3.png)
 ![](images/4.png)
 
 
 ### 3. Métricas
+
+Se muestra a la derecha del mapa, los totales para cada tipo de caso y el cambio que ha existido respecto al día anterior ya sea incremento o decremento.
+
+![](images/8.png)
 
 
 ### 4. Gráficas
