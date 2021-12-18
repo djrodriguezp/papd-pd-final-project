@@ -30,6 +30,8 @@ docker-compose up -d
 
 Al iniciar el contenedor se crea una tabla (covid19.global_data) con el esquema definido en  [schema.sql](../../mysql/scripts/schema.sql).  La tabla contiene id, país, estado, latitud, longitud, fecha, número de casos y el status.
 
+![](images/3.png)
+
 ## Airflow
 
 ![](images/2.png)
