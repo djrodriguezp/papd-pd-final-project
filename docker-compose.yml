@@ -32,7 +32,7 @@ services:
             - ./airflow/monitor:/home/airflow/monitor
             # - ./plugins:/usr/local/airflow/plugins
         ports:
-            - "8080:8080"
+            - "127.0.0.1:8080:8080"
         command: webserver
         healthcheck:
             test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
@@ -47,9 +47,19 @@ services:
              - ./mysql/scripts/schema.sql:/docker-entrypoint-initdb.d/1.sql
          restart: always
          ports:
-             - 3306:3306
+             - "127.0.0.1:3306:3306"
          environment:
              MYSQL_ROOT_PASSWORD: supersecretpass
              MYSQL_DATABASE: covid19
              MYSQL_USER: covid19
              MYSQL_PASSWORD: secretpass
+    streamlit:
+        build: ./Dockerfiles/streamlit
+        restart: always
+        depends_on:
+            - mysql_db
+        command: "streamlit run src/main.py"
+        ports:
+          - "127.0.0.1:8501:8501"
+        volumes:
+            - ./streamlit/src:/usr/src/app/src

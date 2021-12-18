@@ -12,7 +12,8 @@ st.set_page_config(layout="wide")
 
 @st.cache(allow_output_mutation=True)
 def load_covid_dataset():
-    db_source = 'mysql+mysqlconnector://covid19:secretpass@127.0.0.1/covid19'
+    #db_source = 'mysql+mysqlconnector://covid19:secretpass@127.0.0.1/covid19'
+    db_source = 'mysql+mysqlconnector://covid19:secretpass@mysql_db/covid19'
     db_conn = create_engine(db_source)
     df = pd.read_sql("SELECT * FROM global_data", con=db_conn)
     df["date"] = pd.to_datetime(df['date'], format='%Y-%m-%d').dt.date
@@ -157,21 +158,21 @@ metric_delta_recovered = metric_total_recovered - filtered_data[(filtered_data['
 map_col2.metric(
     "Total de Casos Confirmados",
     value = f"{metric_total_cases:,}",
-    delta =  f"{metric_delta_cases:,}",
+    delta =  f"{metric_delta_cases:,} desde el dia anterior",
     delta_color = "inverse"
 )
 
 map_col2.metric(
     "Total de Muertes",
     value = f"{metric_total_deaths:,}",
-    delta =  f"{metric_delta_deaths:,}",
+    delta =  f"{metric_delta_deaths:,} desde el dia anterior",
     delta_color = "inverse"
 )
 
 map_col2.metric(
     "Total de Casos Recuperados",
     value=f"{metric_total_recovered:,}",
-    delta=f"{metric_delta_recovered:,}"
+    delta=f"{metric_delta_recovered:,} desde el dia anterior"
 )
 
 gb = GridOptionsBuilder.from_dataframe(map_df)
