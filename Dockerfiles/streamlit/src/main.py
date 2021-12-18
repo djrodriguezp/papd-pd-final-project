@@ -5,6 +5,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from datetime import datetime, timedelta
+from st_aggrid import AgGrid
+from st_aggrid.grid_options_builder import GridOptionsBuilder
 
 st.set_page_config(layout="wide")
 
@@ -172,9 +174,13 @@ map_col2.metric(
     delta=f"{metric_delta_recovered:,}"
 )
 
+gb = GridOptionsBuilder.from_dataframe(map_df)
+gb.configure_pagination()
+gridOptions = gb.build()
 
-table_expander = st.expander("Ver tabla de datos")
-table_expander.dataframe(filtered_data)
+table_expander = st.expander("Ver tabla de datos mostrados en mapa")
+with table_expander:
+    AgGrid(map_df, gridOptions=gridOptions)
 
 col1, col2, col3 = st.columns(3)
 total_confirmed_by_date = get_cases_count(filtered_data, ['date', 'status'], ['confirmed'])
