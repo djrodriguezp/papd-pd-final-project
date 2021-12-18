@@ -7,7 +7,7 @@ La configuración de los contenedores se encuentran definidos en el archivo [doc
 
 El docker-compose crea cuatro contenedores (i) postgres, (ii) airflow, (iii) mysql_db y (iv) streamlit.  Entre otras cosas, en éste archivo se definen los puertos utilizados, path de los volumes y credenciales de las bases de datos.  
 
-Cómo se muestra en la topología, toda la arquitectura funciona dentro de la misma red local.
+Cómo se muestra en la topología, toda la arquitectura funciona dentro de la misma red local. Además, los servicios son inicializados y listos para ser utilizados.
 
 Antes de poner a correr los contenedores, es necesario hacer build de los contenedores **airflow** y **streamlit**, 
 esto se hace ejecutando el comando:
@@ -57,7 +57,3 @@ En Streamlit se definen filtros, sidebars, mapas y gráficas.  Para estó fue ne
 - Datetime: Nos permite trabajar con fechas como objetos.
 - AgGrid: Nos permite la interacción de columnas, sorting, row selection, etc., en la tabla de datos.
 
-Iniciar streamlit:
-```
-streamlit run Dockerfiles/streamlit/src/main.py 
-```
