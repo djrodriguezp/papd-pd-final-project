@@ -6,9 +6,10 @@ El dashboard que se presenta está formado por 4 secciones:
 1. Filtros
 2. Mapa
 3. Métricas
-4. Gráficas
+4. Tabla de datos
+5. Gráficas
 
-![](images/1.png)
+![](images/10.png)
 
 
 ### 1. Filtros
@@ -42,7 +43,14 @@ Se muestra a la derecha del mapa, los totales para cada tipo de caso y el cambio
 ![](images/8.png)
 
 
-### 4. Gráficas
+### 4. Tabla de datos
+
+Se muestran los datos filtrados en formato de tabla.
+
+![](images/9.png)
+
+
+### 5. Gráficas
 
 En las gráficas se muestran 3 tipos diferentes:
 1. Casos Totales Confirmados por Día
