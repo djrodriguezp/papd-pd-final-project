@@ -45,7 +45,7 @@ Antes de insertar los datos a la base de datos, todas las fechas son transformad
 
 ## Streamlit
 
-Se utilizó la biblitoteca Streamlit para la creación del dashboard.  La configuración está definida en el archivo [main.py] (../../streamlit/src/main.py) y básicamente lo que hace es leer los datos de la base de datos *mysql_db* y visualizarlos gráficamente en http://localhost:8501/.  
+Se utilizó la biblitoteca Streamlit para la creación del dashboard.  La configuración está definida en el archivo [main.py](../../streamlit/src/main.py) y básicamente lo que hace es leer los datos de la base de datos *mysql_db* y visualizarlos gráficamente en http://localhost:8501/.  
 
 En Streamlit se definen filtros, sidebars, mapas y gráficas.  Para estó fue necesario utilizar otras librerías como:
 
@@ -55,4 +55,9 @@ En Streamlit se definen filtros, sidebars, mapas y gráficas.  Para estó fue ne
 - Pandas: Útil para la maniputación y análisis de datos.
 - Plotly.express: Creación de simples e interactivas visualizaciones.
 - Datetime: Nos permite trabajar con fechas como objetos.
-- AgGrid: Nos permite la interacción de columnas, sorting, row selection, etc., en la tabla de nuestra tabla de datos.
+- AgGrid: Nos permite la interacción de columnas, sorting, row selection, etc., en la tabla de datos.
+
+Iniciar streamlit:
+```
+streamlit run Dockerfiles/streamlit/src/main.py 
+```
