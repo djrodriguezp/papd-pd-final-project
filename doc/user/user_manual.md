@@ -37,9 +37,18 @@ Se muestra a la derecha del mapa, los totales para cada tipo de caso y el cambio
 ![](images/4.png)
 
 
-### 3. Metricas
+### 3. Métricas
 
 
 ### 4. Gráficas
 
+En las gráficas se muestran 3 tipos diferentes:
+1. Casos Totales Confirmados por Día
+2. Muertes por Día
+3. Casos Recuperados Totales por Día
 
+De forma interactiva al colocar el cursor sobre la gráfica nos despliega información del caso, al hacer una ventana de selección sobre la gráfica se hace zoom y muestra únicamente la porción seleccionada.
+
+![](images/5.png)
+![](images/6.png)
+![](images/7.png)
