@@ -9,7 +9,7 @@ El dashboard que se presenta está formado por 4 secciones:
 4. Tabla de datos
 5. Gráficas
 
-![](images/1.png)
+![](images/10.png)
 
 
 ### 1. Filtros
